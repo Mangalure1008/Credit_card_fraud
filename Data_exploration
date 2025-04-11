@@ -45,3 +45,10 @@ plt.figure(figsize=(12, 10))
 sns.heatmap(correlation_matrix, cmap='coolwarm', annot=False, fmt=".2f") # annot=True to show values
 plt.title('Correlation Heatmap')
 plt.show()
+
+
+Explanation:
+We import the necessary libraries (pandas for data manipulation, numpy for numerical operations, matplotlib and seaborn for visualization, scikit-learn for machine learning).
+pd.read_csv('creditcard.csv') loads the dataset into a pandas DataFrame. Important: Make sure the CSV file is in the same directory as your Python script or provide the correct file path.
+df.head() displays the first 5 rows to inspect the data.
+df.info() provides information about the dataset: data types, non-null values, etc. This helps understand the structure and identify potential issues.
