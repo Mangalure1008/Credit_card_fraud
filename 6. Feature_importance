@@ -1,0 +1,22 @@
+# Feature Importance (if the model supports it - e.g., RandomForestClassifier)
+if hasattr(model, 'feature_importances_'):
+    importances = model.feature_importances_
+    feature_names = X.columns
+    feature_importances = pd.Series(importances, index=feature_names)
+
+    plt.figure(figsize=(10, 8))
+    feature_importances.sort_values(ascending=False).plot(kind='bar')
+    plt.title('Feature Importances')
+    plt.ylabel('Importance')
+    plt.show()
+
+    print("\nTop 5 important features:")
+    print(feature_importances.sort_values(ascending=False).head(5))
+else:
+    print("Feature importances not available for this model (Logistic Regression).")
+
+
+Explanation:
+This section is optional but highly valuable for understanding why the model is making its predictions. It shows which features are most influential in identifying fraudulent transactions.
+feature_importances_ (if available in the model) provides the importance scores for each feature. For LogisticRegression, you can examine the coefficients, but they don't directly represent "importance" in the same way as in a tree-based model. If you switch to a model like RandomForestClassifier, this section will work directly, providing insights into which anonymized features (V1-V28) are most indicative of fraud.
+The code sorts the feature importances and creates a bar plot to visualize them.
