@@ -48,7 +48,11 @@ plt.show()
 
 
 Explanation:
-We import the necessary libraries (pandas for data manipulation, numpy for numerical operations, matplotlib and seaborn for visualization, scikit-learn for machine learning).
-pd.read_csv('creditcard.csv') loads the dataset into a pandas DataFrame. Important: Make sure the CSV file is in the same directory as your Python script or provide the correct file path.
-df.head() displays the first 5 rows to inspect the data.
-df.info() provides information about the dataset: data types, non-null values, etc. This helps understand the structure and identify potential issues.
+df.describe() provides summary statistics (count, mean, standard deviation, min, max, percentiles) for numerical columns.
+df.isnull().sum() checks for missing values in each column. This is a critical step.
+df['Class'].value_counts(normalize=True) gives the distribution of the target variable ("Class"). normalize=True calculates percentages. This is very important to see if the classes are imbalanced (which they likely are in this fraud detection dataset).
+We create several plots:
+sns.countplot() shows the distribution of the 'Class' variable (fraud vs. non-fraud)
+sns.histplot() visualizes the distributions of 'Amount' and 'Time'.
+sns.boxplot() compares the 'Amount' across the two classes (fraud and non-fraud). This is to check if there are any apparent differences in the Amount between them.
+df.corr() computes the correlation matrix. sns.heatmap() visualizes this matrix, showing how each feature correlates with every other feature. This helps identify features that might be highly predictive of fraud (and those that are redundant).
