@@ -1,0 +1,28 @@
+# 3.3.1. Handle Missing Values (if any)
+# In this dataset, there are no missing values.  If there were, you'd use one of these methods:
+# df.dropna(inplace=True)  # Remove rows with missing values
+# df.fillna(df.mean(), inplace=True) # Fill missing values with the mean of the column
+
+# 3.3.2. Feature Scaling (Scaling 'Amount' and 'Time' is important)
+scaler = StandardScaler()
+df['Amount'] = scaler.fit_transform(df[['Amount']]) #Scale the Amount column
+df['Time'] = scaler.fit_transform(df[['Time']]) #Scale the Time column
+
+# 3.3.3. Data Splitting (Training and Testing sets)
+X = df.drop('Class', axis=1) # Features (independent variables) - all columns except 'Class'
+y = df['Class']             # Target variable (dependent variable) - 'Class'
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+# test_size=0.2 means 20% of the data will be used for testing.
+# random_state=42 ensures the split is reproducible.
+# stratify=y  preserves the class distribution in both training and testing sets.
+
+# 3.3.4.  Handling Class Imbalance (Very Important!) - using SMOTE
+#  Since fraud is rare, we'll likely have a class imbalance (much more non-fraud than fraud).
+#  We use SMOTE (Synthetic Minority Oversampling Technique) to balance the classes.
+smote = SMOTE(random_state=42)
+X_train_smote, y_train_smote = smote.fit_resample(X_train, y_train)
+
+# Display the new class counts after SMOTE
+print("Class distribution after SMOTE:")
+print(pd.Series(y_train_smote).value_counts())
