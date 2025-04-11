@@ -1,0 +1,16 @@
+# 3.4.1. Choose a Model (Logistic Regression) - a good starting point
+model = LogisticRegression(random_state=42, solver='liblinear') #solver important for convergence
+# Other options:  RandomForestClassifier,  GradientBoostingClassifier, etc.
+
+# 3.4.2. Train the Model
+model.fit(X_train_smote, y_train_smote)  # Train on the SMOTE-resampled training data
+
+# 3.4.3. Make Predictions on the Test Set
+y_pred = model.predict(X_test)
+y_pred_proba = model.predict_proba(X_test)[:, 1]  # Probabilities for the positive class (fraud)
+
+
+Explanation:
+Model Selection: We choose LogisticRegression as a starting point. It's relatively simple to understand and interpret, and it often works well as a baseline. Other models (e.g., Random Forest) can be tried for potentially better performance. The solver parameter in Logistic Regression is important for optimization.
+Training: The model is trained using the resampled training data (X_train_smote, y_train_smote). This is where the model learns the patterns in the data.
+Prediction: The trained model is used to make predictions on the test set (X_test). y_pred contains the predicted class labels (0 or 1). y_pred_proba provides the probabilities of each transaction being fraudulent (which is useful for threshold tuning and ROC curves).
