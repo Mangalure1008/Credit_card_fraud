@@ -1,0 +1,33 @@
+# 3.5.1. Evaluate the Model
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# Calculate ROC AUC
+roc_auc = roc_auc_score(y_test, y_pred_proba)
+print(f"\nROC AUC: {roc_auc}")
+
+# 3.5.2. Visualize ROC Curve
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+plt.figure(figsize=(8, 6))
+plt.plot(fpr, tpr, label=f'ROC curve (area = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], 'k--')  # Diagonal line (random guessing)
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend(loc='lower right')
+plt.show()
+
+
+Explanation:
+Confusion Matrix: Shows the counts of True Positives (TP), True Negatives (TN), False Positives (FP), and False Negatives (FN). This is crucial for understanding the model's performance.
+Classification Report: Provides precision, recall, F1-score, and support for each class (0 and 1). These metrics give a more detailed picture of the model's performance.
+Precision: Out of all the transactions predicted as fraudulent, how many were actually fraudulent? (TP / (TP + FP))
+Recall: Out of all the actual fraudulent transactions, how many did the model correctly identify? (TP / (TP + FN))
+F1-score: The harmonic mean of precision and recall.
+ROC AUC: ROC (Receiver Operating Characteristic) curve and AUC (Area Under the Curve) are important for evaluating a model's ability to distinguish between classes.
+The ROC curve plots the True Positive Rate (TPR or Recall) against the False Positive Rate (FPR) at various threshold settings.
+AUC represents the area under the ROC curve. A higher AUC (closer to 1) indicates better performance.
+Visualization: The ROC curve is plotted to visually assess the model's performance.
