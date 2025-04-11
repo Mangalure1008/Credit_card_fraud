@@ -1,0 +1,24 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, roc_curve
+from sklearn.ensemble import RandomForestClassifier
+from imblearn.over_sampling import SMOTE
+
+# Load the dataset
+try:
+    df = pd.read_csv('creditcard.csv')  # Replace with your actual file path if needed
+    print("Dataset loaded successfully!")
+except FileNotFoundError:
+    print("Error: 'creditcard.csv' not found.  Please check the file path.")
+    exit() # Exit the script if the file isn't found
+
+# Display the first few rows to get a feel for the data
+print(df.head())
+
+# Check dataset info:
+print(df.info())
