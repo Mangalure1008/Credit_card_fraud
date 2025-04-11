@@ -1,0 +1,47 @@
+# 3.2.1 Descriptive Statistics
+print(df.describe())
+
+# 3.2.2. Check for Missing Values
+print(df.isnull().sum()) # Check for missing values in each column
+
+# 3.2.3. Target Variable Distribution (Class)
+print(df['Class'].value_counts(normalize=True)) # Show the percentage of fraud and legitimate transactions
+
+# Visualize Target Variable Distribution
+plt.figure(figsize=(6, 4))
+sns.countplot(x='Class', data=df)
+plt.title('Distribution of Transaction Classes')
+plt.xlabel('Class (0: Legitimate, 1: Fraudulent)')
+plt.ylabel('Count')
+plt.show()
+
+# 3.2.4. Visualize 'Amount'
+plt.figure(figsize=(8, 6))
+sns.histplot(df['Amount'], bins=50)
+plt.title('Distribution of Transaction Amount')
+plt.xlabel('Amount')
+plt.ylabel('Frequency')
+plt.show()
+
+# 3.2.5. Visualize 'Time'
+plt.figure(figsize=(8, 6))
+sns.histplot(df['Time'], bins=50)
+plt.title('Distribution of Transaction Time')
+plt.xlabel('Time (seconds)')
+plt.ylabel('Frequency')
+plt.show()
+
+# 3.2.6. Relationship between Amount and Class
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='Class', y='Amount', data=df)
+plt.title('Transaction Amount vs. Class')
+plt.xlabel('Class')
+plt.ylabel('Amount')
+plt.show()
+
+# 3.2.7. Correlations (Using Heatmap)
+correlation_matrix = df.corr()
+plt.figure(figsize=(12, 10))
+sns.heatmap(correlation_matrix, cmap='coolwarm', annot=False, fmt=".2f") # annot=True to show values
+plt.title('Correlation Heatmap')
+plt.show()
