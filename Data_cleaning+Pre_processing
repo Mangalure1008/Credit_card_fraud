@@ -26,3 +26,9 @@ X_train_smote, y_train_smote = smote.fit_resample(X_train, y_train)
 # Display the new class counts after SMOTE
 print("Class distribution after SMOTE:")
 print(pd.Series(y_train_smote).value_counts())
+
+Explanation:
+Missing Values: The code shows how to handle missing values if they exist (using dropna() or fillna()). The Credit Card Fraud dataset doesn't have missing values, but it is important to know how to deal with them.
+Feature Scaling: It's very important to scale the 'Amount' and 'Time' features using StandardScaler. This is because these features have different scales compared to the V1-V28 features, and scaling helps the machine learning models work better. Scaling puts all the features on a similar scale (typically with a mean of 0 and a standard deviation of 1).
+Data Splitting: The data is split into training and testing sets using train_test_split(). This is essential for evaluating the performance of the model on unseen data. stratify=y ensures that the class distribution is preserved in both sets.
+Handling Class Imbalance: This is a critical step! Fraudulent transactions are typically rare. We use SMOTE (Synthetic Minority Oversampling Technique) to oversample the minority class (fraud) by creating synthetic samples. This helps the model learn to identify fraud more effectively.
